@@ -59,8 +59,4 @@ RCT_EXTERN_METHOD(incrementUserProperty:(NSString)key
                   withBy:(NSString)by
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
-
-RCT_EXTERN_METHOD(setAdvertisingIdentifier:(NSString)idfa
-                  withResolver:(RCTPromiseResolveBlock)resolve
-                  withRejecter:(RCTPromiseRejectBlock)reject)
 @end

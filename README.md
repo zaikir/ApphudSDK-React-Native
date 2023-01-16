@@ -1,83 +1,159 @@
-<p align="center">
-<img src="https://cdn.siter.io/assets/ast_kSk43nA4wqPNF8sfBtWdJsL1Z/85cc5c6c-43dd-44a2-90cf-2ae17cd6a25d.svg" alt="Apphud" width="20%" height="20%"/>
- </p>
+# react-native-apphud-sdk
 
-## Greetings!
-
-Apphud SDK is an open-source Swift library to manage auto-renewable subscriptions and other in-app purchases in your app.
-<p align="center">
-<img src="https://apphud.com/images/greetings.png" width="30%" height="30%" />
-</p>
-
-## What is Apphud?
-
-Apphud is all-in-one infrastructure for your app growth. Apphud helps marketing and product management teams to make right decisions based on the data and tools.
-
-## Subscriptions Infrastructure
-
-Integrate in-app purchases and subscriptions in your mobile app in 2 lines of code. No server code required. Apphud works with all apps on iOS, iPadOS, MacOS, tvOS, watchOS and Android. Cross-platform support out of the box.
-<p align="center">
-<img src="https://apphud.com/images/easy-2.png" width="50%" height="50%" />
-</p>
-
-## Real-time Revenue Analytics
-
- View key subscription metrics in our [dashboard](https://docs.apphud.com/analyze/dashboard) and [charts](https://docs.apphud.com/analyze/charts), like MRR, Subscriber Retention (Cohorts), Churn rate, ARPU, Trial Conversions, Proceeds, Refunds, etc.
-
-<p align="center">
-<img src="https://apphud.com/images/why.png"  width="35%" height="35%" />
-</p>
-  
-## Integrations
-
-Send subscription events to your favorite third party platforms with automatic currency conversion. Choose from 18 integrations, including: AppsFlyer, Adjust, Branch, Firebase, Amplitude, Mixpanel, OneSignal, Facebook, TikTok, and more. Custom Server-to-Server webhooks and APIs are also available.
-
-<p align="center">
-<img src="https://apphud.com/images/integrations.png"  width="35%" height="35%" />
-</p>
-
-## A/B Experiments
-
-Test different in-app purchases and paywalls. Run experiments to find the best combination of prices and purchase screen parameters that maximize ROI.
-
-<p align="center">
-<img src="https://apphud.com/images/ab_tests.png"  width="35%" height="35%" />
-</p>
-
-## Web-to-App
-
-Web-to-App solution overcomes IDFA limitations in the post iOS 14.5 era. Using this solution you can run paid campaigns in Facebook or TikTok and get real-time attribution with nearly 100% accuracy.
-<p align="center">
-<img src="https://1612099904-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-LpcBgCSJyU0DTawIxFp%2Fuploads%2FY9kRJOi4QaGn2Rp0Wksz%2Fweb-to-app.png?alt=media&token=9d851fc0-34a3-4035-8a3d-03b728e313e0"  width="50%" height="50%" />
-</p>
-
-## Rules
-
-Apphud may win back lapsed subscribers, reduce churn rate, get cancellation insights, send push notifications and many more using the mechanics below. This mechanics are called Rules. Choose between manual, scheduled and automated rule. Manual rules will be performed manually, scheduled rule will be performed on a certain time, automated rule will be triggered after certain event. Use our visual web editor to create you custom screen or screen sequence for Rule, and analyze user stats from every created screen.
-<p align="center">
-<img src="https://apphud.com/images/rules.png"  width="35%" height="35%" />
-</p>
-
-## Why Apphud?
-
-**Complete mobile in-app purchases stack with no extra costs.** Don’t waste time and money on building your own in-app purchases infrastructure. Use Apphud for free until your app revenue increases $10,000 per month.
-
-**Focused on data accuracy.** Apphud provides the highest accuracy on app revenue tracking. Analyze all important app metrics with a confidence.
-
-**Trusted by thousands of mobile apps worldwide.** From small apps earning a few thousands per month to a leading mobile-focused companies.
-
-**Support that really cares**. With Apphud you can be sure you’re not alone with in-app subscription growth challenges. We proud of our zero-ignored tickets support – answering to every request in minutes! Customers success and priority support for Enterprise clients.
-
-**Retain users and grow revenue**. Use our Rules to engage and re-engage subscribers with no code required. Run pricing experiments to find a better price.
+Apphud SDK for react native
 
 ## Installation
 
-Create your account at [Apphud for free](https://app.apphud.com/sign_up?utm_source=github&utm_medium=article&utm_campaign=github). Please feel free to read our [SDK Integration Guide](https://docs.apphud.com/getting-started/sdk-integration).
+```sh
+npm install @apphud/react-native-apphud-sdk
+```
 
-## Having a question?
+## Usage
 
-If you have any questions or troubles with SDK integration feel free to contact us. We are online.
+```js
+import ApphudSdk from "@apphud/react-native-apphud-sdk";
 
-https://apphud.com/contacts
+// ...
+```
 
-*Like Apphud? Place a star at the top 😊*
+### Initialize SDK
+
+To initialize Apphud SDK you will need SDK Token. It is a unique identifier of your Apphud application. You can get it in your Apphud application settings under General tab
+
+Basic initialization looks like this:
+
+```js
+await ApphudSdk.start({ apiKey: "your_api_key" });
+```
+
+Initialization Options
+
+|property|type|platform|required
+|---|---|---|---|
+|apiKey|String|iOS, Android|yes
+|userId|String|iOS, Android|no
+|deviceId|String|Android|no
+|observerMode|Bool|iOS|no
+
+You can also initialize SDK with custom Device ID. This should be used if you plan to use logout / login features. You can pass the same identifier to Device ID and User ID:
+```js
+await ApphudSdk.startManually({ apiKey: "your_api_key", deviceId: "", userId: "" });
+```
+
+Log out method will clear all saved data and reset SDK to uninitialised state:
+
+```js
+await ApphudSdk.logout();
+```
+
+### Purchase using Apphud Billing Client
+
+To make a purchase call:
+
+```js
+await ApphudSdk.purchase(productIdentifier);
+```
+
+### Check Subscription Status
+
+```js
+await ApphudSdk.hasActiveSubscription();
+```
+
+Returns true if user has active subscription. Use this method to determine whether to unlock premium functionality to the user.
+
+### Get Products
+
+Apphud automatically fetches SKProduct/SKDetails objects upon launch. Make sure products identifiers are added in Apphud products. To get your products call:
+
+```js
+await ApphudSdk.products();
+```
+
+### Get Subscription Details
+
+To get subscription object (which contains expiration date, autorenewal status, etc.) use the following method:
+```js
+await ApphudSdk.subscription();
+```
+
+### Check Non-renewing Purchase Status
+
+Use this method to check whether the user has purchased in-app purchase and it's not refunded. Returns false if was never purchased or is refunded.
+
+```js
+await ApphudSdk.isNonRenewingPurchaseActive(productIdentifier)
+```
+
+### Get Non-renewing Purchase Details
+
+To get non-renewing purchases, which contain purchase date, product identifier and cancellation date, use the following method:
+
+```js
+await ApphudSdk.nonRenewingPurchases();
+```
+
+### Get User ID
+
+To get user id you can use this method:
+
+```js
+await ApphudSdk.userId()();
+```
+
+### Integrations
+
+Submit attribution data to Apphud from your attribution network provider.
+
+```js
+await ApphudSdk.addAttribution(options);
+```
+
+### Restore Purchases (only iOS)
+
+If your app doesn't have a login system, which identifies a premium user by his credentials, then you need a "restore" mechanism.
+
+```js
+await ApphudSdk.restorePurchases();
+```
+Basically it just sends App Store Receipt to Apphud and returns subscriptions (or nil, if subscriptions are never purchased), non-renewing purchases (or nil, if there are no any) and an optional error.
+
+### Observer Mode (Android)
+
+If you use your own billing then you should sync purchases each time user makes any purchase or restoration. Just call after purchase or restore:
+
+```js
+await ApphudSdk.syncPurchases();
+```
+Keep in mind, that you are responsible for acknowledging or consuming all purchases in observer mode!
+
+### Migrate existing purchases (Android)
+
+If you need to migrate existing purchases in case you already have a live app or if you need to restore purchases when user hits Restore button, just call syncPurchases() method.
+
+```js
+await ApphudSdk.syncPurchases();
+```
+Do not migrate purchases on every app launch. One successful time is enough. Store flag in your app if purchases were successfully migrated
+
+## Troubleshooting
+
+### Build failed (xCode >= 12.0)
+
+The error log
+
+```markdown
+Undefined symbol: __swift_FORCE_LOAD_$_swiftWebKit
+```
+
+You should add **libswiftWebKit.tbd** to **Link Binary with Libraries** (from project, Build Phases)
+
+![alt text](https://i.gyazo.com/6ea3f023b9cdca3e859b9cc770ff2a08.png)
+
+## Contributing
+
+See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+
+## License
+
+MIT

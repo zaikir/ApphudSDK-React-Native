@@ -1,0 +1,1 @@
+extends: '@dev/semantic-release-package-config'

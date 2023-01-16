@@ -1,0 +1,14 @@
+include:
+  - project: shared/ci
+    ref: master
+    file: /eslint.yml
+  - project: shared/ci
+    ref: master
+    file: /release-package.yml
+
+stages:
+  - eslint
+  - release
+
+release-package:
+  needs: ['eslint']

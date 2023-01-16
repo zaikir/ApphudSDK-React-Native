@@ -166,11 +166,4 @@ class ApphudSdk: NSObject {
     func syncPurchases(resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
         reject("Error method", "Unsupported method", nil);
     }
-
-    @objc(setAdvertisingIdentifier:withResolver:withRejecter:)
-    func setAdvertisingIdentifier(idfa: String, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
-        resolve(
-            Apphud.setAdvertisingIdentifier(idfa)
-        );
-    }
 }

@@ -131,5 +131,4 @@ export type ApphudSdkType = {
     key: ApphudUserPropertyKey | String,
     by: string
   ): Promise<any>;
-  setAdvertisingIdentifier(idfa: String): Promise<any>;
 };
