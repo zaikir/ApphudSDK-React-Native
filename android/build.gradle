@@ -127,6 +127,6 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'com.github.apphud:ApphudSDK-Android:1.6.4'
+  implementation 'com.github.apphud:ApphudSDK-Android:1.7.0'
   implementation 'com.android.billingclient:billing:4.0.0'
 }
