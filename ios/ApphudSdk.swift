@@ -166,4 +166,13 @@ class ApphudSdk: NSObject {
     func syncPurchases(resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
         reject("Error method", "Unsupported method", nil);
     }
+
+    @objc(checkEligibilitiesForIntroductoryOffers:withRejecter:)
+    func checkEligibilitiesForIntroductoryOffers(resolve: @escaping RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+        Apphud.checkEligibilitiesForIntroductoryOffers(products: Apphud.products)  { result in
+            resolve([
+                "test": true as Any,
+            ])
+        }
+    }
 }

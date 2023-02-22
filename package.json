@@ -1,6 +1,6 @@
 {
   "name": "@kirz/react-native-apphud-sdk",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "Apphud SDK for react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
