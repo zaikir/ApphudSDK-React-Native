@@ -64,4 +64,7 @@ RCT_EXTERN_METHOD(checkEligibilitiesForIntroductoryOffer:(NSString)productIdenti
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(hasPremiumAccess:(RCTPromiseResolveBlock)resolve
+                  withRejecter:(RCTPromiseRejectBlock)reject)
+
 @end

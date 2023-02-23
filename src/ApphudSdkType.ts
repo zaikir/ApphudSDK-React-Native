@@ -111,13 +111,14 @@ export type ApphudSdkType = {
   start(options: StartProperties): Promise<boolean>;
   startManually(options: StartProperties): Promise<boolean>;
   logout(): Promise<boolean>;
+  hasPremiumAccess(): Promise<boolean>;
   hasActiveSubscription(): Promise<boolean>;
   products(): Promise<Array<ApphudProduct>>;
   subscription(): Promise<ApphudSubscription>;
   subscriptions(): Promise<Array<ApphudSubscription>>;
   purchase(productIdentifier: string): Promise<PurchaseResponse>;
   isNonRenewingPurchaseActive(productIdentifier: string): Promise<boolean>;
-  nonRenewingPurchases(): Promise<ApphudNonRenewingPurchase>;
+  nonRenewingPurchases(): Promise<ApphudNonRenewingPurchase[]>;
   restorePurchases(): Promise<RestorePurchase>;
   syncPurchases(): Promise<boolean>;
   addAttribution(options: AttributionProperties): Promise<boolean>;

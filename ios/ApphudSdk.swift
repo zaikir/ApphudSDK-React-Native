@@ -51,7 +51,12 @@ class ApphudSdk: NSObject {
         Apphud.logout();
         resolve(true);
     }
-    
+
+    @objc(hasPremiumAccess:withRejecter:)
+    func hasPremiumAccess(resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+        resolve(Apphud.hasPremiumAccess());
+    }
+
     @objc(hasActiveSubscription:withRejecter:)
     func hasActiveSubscription(resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
         resolve(Apphud.hasActiveSubscription());
