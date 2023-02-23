@@ -14,6 +14,10 @@ class ApphudSdkEvents: RCTEventEmitter {
         Apphud.setUIDelegate(self);
     }
     
+    @objc override static func requiresMainQueueSetup() -> Bool {
+        return false;
+    }
+
     @objc(setApphudProductIdentifiers:withResolve:withReject:)
     public func setApphudProductIdentifiers(ids: NSArray, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) -> Void {
         self.productIdentifiers = ids as! [String];

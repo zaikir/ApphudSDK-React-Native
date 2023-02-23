@@ -131,4 +131,7 @@ export type ApphudSdkType = {
     key: ApphudUserPropertyKey | String,
     by: string
   ): Promise<any>;
+  checkEligibilitiesForIntroductoryOffer(
+    productIdentifier: string
+  ): Promise<boolean>;
 };

@@ -60,6 +60,8 @@ RCT_EXTERN_METHOD(incrementUserProperty:(NSString)key
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(checkEligibilitiesForIntroductoryOffers:(RCTPromiseResolveBlock)resolve
+RCT_EXTERN_METHOD(checkEligibilitiesForIntroductoryOffer:(NSString)productIdentifier
+                  withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
+
 @end

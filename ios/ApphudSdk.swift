@@ -9,23 +9,41 @@ class ApphudSdk: NSObject {
         ApphudHttpClient.shared.sdkVersion = "1.0.7";
     }
 
+    @objc static func requiresMainQueueSetup() -> Bool {
+        return false;
+    }
+
     @objc(start:withResolver:withRejecter:)
-    func start(options: NSDictionary, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+    func start(options: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
         let apiKey = options["apiKey"] as! String;
         let userID = options["userId"] as? String;
         let observerMode = options["observerMode"] as? Bool ?? true;
         Apphud.start(apiKey: apiKey, userID: userID, observerMode: observerMode);
-        resolve(true);
+        Apphud.fetchProducts { products, err in
+            if (err != nil) {
+                reject("Error", err?.localizedDescription, nil);
+                return;
+            }
+            
+            resolve(true);
+        }
     }
     
     @objc(startManually:withResolver:withRejecter:)
-    func startManually(options: NSDictionary, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+    func startManually(options: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
         let apiKey = options["apiKey"] as! String;
         let userID = options["userId"] as? String;
         let deviceID = options["deviceId"] as? String;
         let observerMode = options["observerMode"] as? Bool ?? true;
         Apphud.startManually(apiKey: apiKey, userID: userID, deviceID: deviceID, observerMode: observerMode);
-        resolve(true);
+        Apphud.fetchProducts { products, err in
+            if (err != nil) {
+                reject("Error", err?.localizedDescription, nil);
+                return;
+            }
+            
+            resolve(true);
+        }
     }
     
     @objc(logout:withRejecter:)
@@ -167,12 +185,17 @@ class ApphudSdk: NSObject {
         reject("Error method", "Unsupported method", nil);
     }
 
-    @objc(checkEligibilitiesForIntroductoryOffers:withRejecter:)
-    func checkEligibilitiesForIntroductoryOffers(resolve: @escaping RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
-        Apphud.checkEligibilitiesForIntroductoryOffers(products: Apphud.products)  { result in
-            resolve([
-                "test": true as Any,
-            ])
+    @objc(checkEligibilitiesForIntroductoryOffer:withResolver:withRejecter:)
+    func checkEligibilitiesForIntroductoryOffer(productIdentifier: String, resolve: @escaping RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+        let product = Apphud.products?.first { $0.productIdentifier == productIdentifier };
+        
+        if (product == nil) {
+            reject("Error", "Product not found", nil);
+            return;
         }
+        
+        Apphud.checkEligibilityForIntroductoryOffer(product: product!, callback: { result in
+            resolve(result)
+        })
     }
 }
