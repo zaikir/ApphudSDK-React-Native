@@ -18,15 +18,16 @@ class ApphudSdk: NSObject {
         let apiKey = options["apiKey"] as! String;
         let userID = options["userId"] as? String;
         let observerMode = options["observerMode"] as? Bool ?? true;
-        Apphud.start(apiKey: apiKey, userID: userID, observerMode: observerMode);
-        Apphud.fetchProducts { products, err in
-            if (err != nil) {
-                reject("Error", err?.localizedDescription, nil);
-                return;
+        Apphud.start(apiKey: apiKey, userID: userID, observerMode: observerMode) {
+            Apphud.fetchProducts { products, err in
+                if (err != nil) {
+                    reject("Error", err?.localizedDescription, nil);
+                    return;
+                }
+                
+                resolve(true);
             }
-            
-            resolve(true);
-        }
+        };
     }
     
     @objc(startManually:withResolver:withRejecter:)
@@ -35,15 +36,16 @@ class ApphudSdk: NSObject {
         let userID = options["userId"] as? String;
         let deviceID = options["deviceId"] as? String;
         let observerMode = options["observerMode"] as? Bool ?? true;
-        Apphud.startManually(apiKey: apiKey, userID: userID, deviceID: deviceID, observerMode: observerMode);
-        Apphud.fetchProducts { products, err in
-            if (err != nil) {
-                reject("Error", err?.localizedDescription, nil);
-                return;
+        Apphud.startManually(apiKey: apiKey, userID: userID, deviceID: deviceID, observerMode: observerMode) {
+            Apphud.fetchProducts { products, err in
+                if (err != nil) {
+                    reject("Error", err?.localizedDescription, nil);
+                    return;
+                }
+                
+                resolve(true);
             }
-            
-            resolve(true);
-        }
+        };
     }
     
     @objc(logout:withRejecter:)
@@ -182,7 +184,12 @@ class ApphudSdk: NSObject {
     
     @objc(subscriptions:withRejecter:)
     func subscriptions(resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
-        reject("Error method", "Unsupported method", nil);
+        let subscriptions = Apphud.subscriptions();
+        resolve(
+            subscriptions?.map({ (subscription) -> NSDictionary in
+                return DataTransformer.apphudSubscription(subscription: subscription);
+            })
+        );
     }
     
     @objc(syncPurchases:withRejecter:)
