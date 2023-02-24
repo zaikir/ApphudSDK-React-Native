@@ -69,6 +69,13 @@ class ApphudSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
     }
 
     @ReactMethod
+    fun hasPremiumAccess(promise: Promise) {
+      promise.resolve(
+        Apphud.hasPremiumAccess()
+      )
+    }
+
+    @ReactMethod
     fun subscriptions(promise: Promise) {
       val subscriptions = Apphud.subscriptions();
       val result: WritableNativeArray = WritableNativeArray();
@@ -91,6 +98,11 @@ class ApphudSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
           promise.reject(this.name, error.message);
         }
       };
+    }
+
+    @ReactMethod
+    fun checkEligibilitiesForIntroductoryOffer(productIdentifier: String, promise: Promise) {
+      promise.resolve(false)
     }
 
     @ReactMethod
