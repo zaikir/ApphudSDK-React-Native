@@ -21,9 +21,9 @@ class ApphudSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
       Apphud.productsFetchCallback {
         var arr: WritableNativeArray = WritableNativeArray();
         it.map { s -> arr.pushMap(ApphudDataTransformer.getProductMap(s)) }
-        reactContext
-          .getJSModule(RCTDeviceEventEmitter::class.java)
-          .emit("productFetchCallback", arr);
+        // reactContext
+        //   .getJSModule(RCTDeviceEventEmitter::class.java)
+        //   .emit("productFetchCallback", arr);
       }
     }
 
