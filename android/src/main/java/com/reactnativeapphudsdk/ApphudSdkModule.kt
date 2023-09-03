@@ -77,13 +77,13 @@ class ApphudSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
 
     @ReactMethod
     fun paywallShown(promise: Promise) {
-      Apphud.paywallShown(ApphudPaywall("","","",false))
+      Apphud.paywallShown(ApphudPaywall("default","default","default",false))
       promise.resolve(true)
     }
 
     @ReactMethod
     fun paywallClosed(promise: Promise) {
-      Apphud.paywallClosed(ApphudPaywall("","","",false))
+      Apphud.paywallClosed(ApphudPaywall("default","default","default",false))
       promise.resolve(true)
     }
 

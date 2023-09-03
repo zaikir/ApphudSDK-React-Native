@@ -61,13 +61,13 @@ class ApphudSdk: NSObject {
 
     @objc(paywallShown:withRejecter:)
     func paywallShown(resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
-        Apphud.paywallShown(try! JSONDecoder().decode(ApphudPaywall.self, from: "{\"id\": \"\",\"name\": \"\",\"identifier\": \"\",\"default\": true,\"items\": [] }".data(using: .utf8)!))
+        Apphud.paywallShown(try! JSONDecoder().decode(ApphudPaywall.self, from: "{\"id\": \"default\",\"name\": \"default\",\"identifier\": \"default\",\"default\": true,\"items\": [] }".data(using: .utf8)!))
         resolve(true);
     }
     
     @objc(paywallClosed:withRejecter:)
     func paywallClosed(resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
-        Apphud.paywallClosed(try! JSONDecoder().decode(ApphudPaywall.self, from: "{\"id\": \"\",\"name\": \"\",\"identifier\": \"\",\"default\": true,\"items\": [] }".data(using: .utf8)!))
+        Apphud.paywallClosed(try! JSONDecoder().decode(ApphudPaywall.self, from: "{\"id\": \"default\",\"name\": \"default\",\"identifier\": \"default\",\"default\": true,\"items\": [] }".data(using: .utf8)!))
         resolve(true);
     }
 
