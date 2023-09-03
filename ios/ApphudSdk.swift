@@ -59,6 +59,18 @@ class ApphudSdk: NSObject {
         resolve(Apphud.hasPremiumAccess());
     }
 
+    @objc(paywallShown:withRejecter:)
+    func paywallShown(resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+        Apphud.paywallShown(try! JSONDecoder().decode(ApphudPaywall.self, from: "{}".data(using: .utf8)!))
+        resolve(true);
+    }
+    
+    @objc(paywallClosed:withRejecter:)
+    func paywallClosed(resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+        Apphud.paywallClosed(try! JSONDecoder().decode(ApphudPaywall.self, from: "{}".data(using: .utf8)!))
+        resolve(true);
+    }
+
     @objc(hasActiveSubscription:withRejecter:)
     func hasActiveSubscription(resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
         resolve(Apphud.hasActiveSubscription());

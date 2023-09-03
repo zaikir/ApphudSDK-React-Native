@@ -76,6 +76,18 @@ class ApphudSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
     }
 
     @ReactMethod
+    fun paywallShown(promise: Promise) {
+      Apphud.paywallShown(ApphudPaywall("","","",false))
+      promise.resolve(true)
+    }
+
+    @ReactMethod
+    fun paywallClosed(promise: Promise) {
+      Apphud.paywallClosed(ApphudPaywall("","","",false))
+      promise.resolve(true)
+    }
+
+    @ReactMethod
     fun subscriptions(promise: Promise) {
       val subscriptions = Apphud.subscriptions();
       val result: WritableNativeArray = WritableNativeArray();
