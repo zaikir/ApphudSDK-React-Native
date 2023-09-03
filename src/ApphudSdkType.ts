@@ -111,6 +111,8 @@ export type ApphudSdkType = {
   start(options: StartProperties): Promise<boolean>;
   startManually(options: StartProperties): Promise<boolean>;
   logout(): Promise<boolean>;
+  paywallShown(): Promise<boolean>;
+  paywallClosed(): Promise<boolean>;
   hasPremiumAccess(): Promise<boolean>;
   hasActiveSubscription(): Promise<boolean>;
   products(): Promise<Array<ApphudProduct>>;
