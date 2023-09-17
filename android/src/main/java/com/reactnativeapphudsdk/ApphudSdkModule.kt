@@ -2,6 +2,8 @@ package com.reactnativeapphudsdk
 import com.apphud.sdk.Apphud
 import com.apphud.sdk.ApphudAttributionProvider
 import com.apphud.sdk.ApphudUserPropertyKey
+import com.apphud.sdk.domain.ApphudPaywall
+import com.apphud.sdk.domain.ApphudProduct
 import com.apphud.sdk.managers.HeadersInterceptor
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
@@ -77,13 +79,13 @@ class ApphudSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
 
     @ReactMethod
     fun paywallShown(promise: Promise) {
-      Apphud.paywallShown(ApphudPaywall("default","default","default",false))
+      Apphud.paywallShown(ApphudPaywall("default","default","default",true, emptyMap<String, Any>(), listOf<ApphudProduct>(), null, null ))
       promise.resolve(true)
     }
 
     @ReactMethod
     fun paywallClosed(promise: Promise) {
-      Apphud.paywallClosed(ApphudPaywall("default","default","default",false))
+      Apphud.paywallClosed(ApphudPaywall("default","default","default",true, emptyMap<String, Any>(), listOf<ApphudProduct>(), null, null ))
       promise.resolve(true)
     }
 
