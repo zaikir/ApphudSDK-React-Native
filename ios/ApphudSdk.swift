@@ -226,7 +226,7 @@ class ApphudSdk: NSObject {
     @objc(setAdvertisingIdentifier:withResolver:withRejecter:)
     func setAdvertisingIdentifier(idfa: String, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
         resolve(
-            Apphud.setAdvertisingIdentifier(idfa)
+            Apphud.setDeviceIdentifiers(idfa: idfa, idfv: nil)
         );
     }
 }
