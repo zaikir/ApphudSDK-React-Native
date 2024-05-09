@@ -222,4 +222,11 @@ class ApphudSdk: NSObject {
             resolve(result)
         })
     }
+
+    @objc(setAdvertisingIdentifier:withResolver:withRejecter:)
+    func setAdvertisingIdentifier(idfa: String, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+        resolve(
+            Apphud.setAdvertisingIdentifier(idfa)
+        );
+    }
 }

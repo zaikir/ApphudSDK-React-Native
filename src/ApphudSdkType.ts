@@ -137,4 +137,5 @@ export type ApphudSdkType = {
   checkEligibilitiesForIntroductoryOffer(
     productIdentifier: string
   ): Promise<boolean>;
+  setAdvertisingIdentifier(idfa: String): Promise<any>;
 };

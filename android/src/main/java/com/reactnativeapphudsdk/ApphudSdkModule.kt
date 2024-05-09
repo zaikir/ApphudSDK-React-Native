@@ -90,6 +90,11 @@ class ApphudSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
     }
 
     @ReactMethod
+    fun setAdvertisingIdentifier(idfa: String, promise: Promise) {
+      promise.reject(this.unSupportMethodMsg);
+    }
+
+    @ReactMethod
     fun subscriptions(promise: Promise) {
       val subscriptions = Apphud.subscriptions();
       val result: WritableNativeArray = WritableNativeArray();
